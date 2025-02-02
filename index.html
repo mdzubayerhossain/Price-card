@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .pricing-card {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-left: 450px;
+            background: #f5f5f5;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            
+        }
+
+        .header {
+            background: #4267B2;
+            color: with;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-left: 10px;
+        }
+
+        .features {
+            padding: 20px;
+        }
+
+        .feature-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .checkbox {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .total-price {
+            padding: 15px 20px;
+            font-weight: bold;
+            border-top: 1px solid #ddd;
+        }
+
+        .buttons {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .order-btn {
+            background: #4267B2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .talk-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .price-change {
+            transition: background-color 0.3s;
+        }
+
+        .price-change.highlight {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-card">
+        <div class="header">
+            <span>Regular Price</span>
+            <span>29900 tk. <span class="original-price">50000 tk.</span></span>
+        </div>
+        
+        <div class="features">
+            <div class="feature-item">
+                <input type="checkbox" checked disabled class="checkbox" data-price="0">
+                <span>Quality checked by okobiz</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" checked disabled class="checkbox" data-price="0">
+                <span>Future updates</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" checked disabled class="checkbox" data-price="0">
+                <span>3 months support from okobiz</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" class="checkbox pricing-option" data-price="5000">
+                <span>Maintenance support 12 months 5000 Taka</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" class="checkbox pricing-option" data-price="4999">
+                <span>Domain & Hosting 4999 Taka for one year</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" class="checkbox pricing-option" data-price="3000">
+                <span>Google Analytics Integrate 3000 Taka</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" class="checkbox pricing-option" data-price="2000">
+                <span>Privacy your Data security 2000 Taka</span>
+            </div>
+            <div class="feature-item">
+                <input type="checkbox" class="checkbox pricing-option" data-price="5000">
+                <span>With Brand Logo 5000 Taka</span>
+            </div>
+        </div>
+
+        <div class="total-price price-change">
+            Total Price: 29900 tk.
+        </div>
+
+        <div class="buttons">
+            <button class="order-btn">ORDER NOW 🛒</button>
+            <button class="talk-btn">LET'S TALK 📞</button>
+        </div>
+    </div>
+
+    <script>
+        const basePrice = 29900;
+        const totalPriceElement = document.querySelector('.total-price');
+        const checkboxes = document.querySelectorAll('.pricing-option');
+
+        function updateTotalPrice() {
+            let total = basePrice;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    total += parseInt(checkbox.dataset.price);
+                }
+            });
+            
+            // Highlight the price change
+            totalPriceElement.textContent = `Total Price: ${total} tk.`;
+            totalPriceElement.classList.add('highlight');
+            setTimeout(() => {
+                totalPriceElement.classList.remove('highlight');
+            }, 300);
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotalPrice);
+        });
+
+        // Initialize with base price
+        updateTotalPrice();
+    </script>
+</body>
+</html>
